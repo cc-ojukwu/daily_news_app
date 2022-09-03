@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="newsItem"
+            type="com.chrisojukwu.newsapp.NewsItem" />
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/text_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/text_view_source_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="@{newsItem.source_id.toUpperCase()}"
+            android:textColor="@color/dim_text_color"
+            tools:hint="The Independent" />
+
+        <TextView
+            android:id="@+id/text_view_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="sans-serif-medium"
+            android:maxLines="4"
+            android:ellipsize="end"
+            android:text="@{newsItem.title}"
+            android:textColor="@color/text_color"
+            android:textSize="20sp"
+            tools:hint="Salman Rushdie attacker arraigned on five different counts" />
+
+        <TextView
+            android:id="@+id/text_view_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textColor="@color/dim_text_color"
+            android:text="@{newsItem.pubDate}"
+            tools:hint="15/07/2022" />
+
+    </LinearLayout>
+
+</layout>
+

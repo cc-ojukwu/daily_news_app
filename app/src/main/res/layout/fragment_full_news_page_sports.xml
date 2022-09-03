@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="sharedViewModel"
+            type="com.chrisojukwu.newsapp.NewsViewModel" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:padding="6dp"
+            tools:context=".FullNewsPageSportsFragment">
+
+            <TextView
+                android:id="@+id/text_view_news_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{sharedViewModel.currentSportsTitle}"
+                android:textAlignment="viewStart"
+                android:textColor="@color/text_color"
+                android:textSize="24sp"
+                tools:text="The Lazy brown fox jumped over the white dog" />
+
+            <TextView
+                android:id="@+id/text_view_news_pub_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:text="@{sharedViewModel.currentSportsPubDate}"
+                android:textAlignment="viewStart"
+                android:textColor="@color/dim_text_color"
+                tools:text="23-21-2022 18-34-45" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@drawable/line_divider" />
+
+            <TextView
+                android:id="@+id/text_view_news_body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:lineSpacingExtra="6sp"
+                android:text="@{sharedViewModel.currentSportsBody}"
+                android:textAlignment="viewStart"
+                android:textColor="@color/text_color"
+                android:textSize="18sp"
+                tools:text="The Lazy brown fox jumped over the white dog" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</layout>

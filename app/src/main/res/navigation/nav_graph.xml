@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/containerFragment">
+
+    <fragment
+        android:id="@+id/completeNewsFragment"
+        android:name="com.chrisojukwu.newsapp.FullNewsPageFragment"
+        android:label="fragment_complete_news"
+        tools:layout="@layout/fragment_full_news_page" >
+        <action
+            android:id="@+id/action_completeNewsFragment_to_containerFragment3"
+            app:destination="@id/containerFragment"
+            app:popUpTo="@id/containerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/containerFragment"
+        android:name="com.chrisojukwu.newsapp.ContainerFragment"
+        android:label="fragment_container"
+        tools:layout="@layout/fragment_container" >
+        <action
+            android:id="@+id/action_containerFragment_to_completeNewsFragment"
+            app:destination="@id/completeNewsFragment" />
+        <action
+            android:id="@+id/action_containerFragment_to_topPicksFragment"
+            app:destination="@id/topPicksFragment" />
+        <action
+            android:id="@+id/action_containerFragment_to_fullNewsPageSportsFragment"
+            app:destination="@id/fullNewsPageSportsFragment" />
+        <action
+            android:id="@+id/action_containerFragment_to_searchNewsFragment"
+            app:destination="@id/searchNewsFragment" />
+        <action
+            android:id="@+id/action_containerFragment_to_fullNewsPageTechFragment"
+            app:destination="@id/fullNewsPageTechFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/topPicksFragment"
+        android:name="com.chrisojukwu.newsapp.TopPicksFragment"
+        android:label="fragment_top_picks"
+        tools:layout="@layout/fragment_top_picks" >
+        <action
+            android:id="@+id/action_topPicksFragment_to_containerFragment"
+            app:destination="@id/containerFragment" />
+        <action
+            android:id="@+id/action_topPicksFragment_to_searchNewsFragment"
+            app:destination="@id/searchNewsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fullNewsPageSportsFragment"
+        android:name="com.chrisojukwu.newsapp.FullNewsPageSportsFragment"
+        android:label="FullNewsPageSportsFragment" >
+        <action
+            android:id="@+id/action_fullNewsPageSportsFragment_to_containerFragment"
+            app:destination="@id/containerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchNewsFragment"
+        android:name="com.chrisojukwu.newsapp.SearchNewsFragment"
+        android:label="fragment_search_news"
+        tools:layout="@layout/fragment_search_news" >
+        <action
+            android:id="@+id/action_searchNewsFragment_to_containerFragment"
+            app:destination="@id/containerFragment" />
+        <action
+            android:id="@+id/action_searchNewsFragment_to_topPicksFragment"
+            app:destination="@id/topPicksFragment" />
+        <action
+            android:id="@+id/action_searchNewsFragment_to_full_news_page_search"
+            app:destination="@id/fullNewsPageSearchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fullNewsPageTechFragment"
+        android:name="com.chrisojukwu.newsapp.FullNewsPageTechFragment"
+        android:label="FullNewsPageTechFragment" >
+        <action
+            android:id="@+id/action_fullNewsPageTechFragment_to_containerFragment"
+            app:destination="@id/containerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fullNewsPageSearchFragment"
+        android:name="com.chrisojukwu.newsapp.FullNewsPageSearch"
+        android:label="full_news_page_search" >
+        <action
+            android:id="@+id/action_full_news_page_search_to_searchNewsFragment"
+            app:destination="@id/searchNewsFragment" />
+    </fragment>
+
+</navigation>
