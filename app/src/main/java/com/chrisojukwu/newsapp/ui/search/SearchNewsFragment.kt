@@ -1,4 +1,4 @@
-package com.chrisojukwu.newsapp
+package com.chrisojukwu.newsapp.ui.search
 
 import android.content.Context.*
 import android.os.Bundle
@@ -11,8 +11,14 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.chrisojukwu.newsapp.NewsViewModel
+import com.chrisojukwu.newsapp.R
+import com.chrisojukwu.newsapp.SimpleDividerItemDecoration
+import com.chrisojukwu.newsapp.data.models.NewsItem
 import com.chrisojukwu.newsapp.databinding.FragmentSearchNewsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchNewsFragment : Fragment() {
 
     private val sharedViewModel: NewsViewModel by activityViewModels()
@@ -57,9 +63,9 @@ class SearchNewsFragment : Fragment() {
         //get search text from editText view and request data from API
         binding.editTextSearch.setOnEditorActionListener {v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH){
-                sharedViewModel.searchString = v.text.toString()
+                val query = v.text.toString()
                 hideKeyboard()
-                sharedViewModel.getNewsSearch()
+                sharedViewModel.getNewsSearch(query)
                 true
             } else{
                 false

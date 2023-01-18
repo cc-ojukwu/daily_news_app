@@ -1,17 +1,17 @@
-package com.chrisojukwu.newsapp
+package com.chrisojukwu.newsapp.ui.search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.chrisojukwu.newsapp.databinding.NewsListItemBinding
+import com.chrisojukwu.newsapp.data.models.NewsItem
+import com.chrisojukwu.newsapp.databinding.NewsListItemSearchBinding
 
 
-class HeadlinesListAdapter(private val onNewsItemClick: (newsStory: NewsItem) -> Unit) :
-    ListAdapter<NewsItem, HeadlinesListAdapter.NewsItemViewHolder>(DiffCallback) {
+class SearchListAdapter(private val onSearchNewsItemClick: (newsStory: NewsItem) -> Unit) :
+    ListAdapter<NewsItem, SearchListAdapter.NewsItemViewHolder>(DiffCallback) {
 
-    //compare consecutive list items
     companion object DiffCallback : DiffUtil.ItemCallback<NewsItem>() {
         override fun areItemsTheSame(oldItem: NewsItem, newItem: NewsItem): Boolean {
             return oldItem.id == newItem.id
@@ -24,7 +24,7 @@ class HeadlinesListAdapter(private val onNewsItemClick: (newsStory: NewsItem) ->
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsItemViewHolder {
-        val view = NewsListItemBinding.inflate(LayoutInflater.from(parent.context))
+        val view = NewsListItemSearchBinding.inflate(LayoutInflater.from(parent.context))
         return NewsItemViewHolder(view)
 
     }
@@ -32,14 +32,13 @@ class HeadlinesListAdapter(private val onNewsItemClick: (newsStory: NewsItem) ->
     override fun onBindViewHolder(holder: NewsItemViewHolder, position: Int) {
         val newsItem = getItem(position)
         holder.bind(newsItem)
-        //set onClickListener for recycler view items
-        holder.binding.cardViewNewsItem.setOnClickListener {
-            onNewsItemClick(newsItem)
+        holder.binding.textContainer.setOnClickListener {
+            onSearchNewsItemClick(newsItem)
         }
     }
 
     class NewsItemViewHolder(
-        var binding: NewsListItemBinding
+        var binding: NewsListItemSearchBinding
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(newsItem: NewsItem) {

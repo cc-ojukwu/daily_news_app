@@ -1,4 +1,4 @@
-package com.chrisojukwu.newsapp
+package com.chrisojukwu.newsapp.data.models
 
 data class NewsResponse(
     val status: String,

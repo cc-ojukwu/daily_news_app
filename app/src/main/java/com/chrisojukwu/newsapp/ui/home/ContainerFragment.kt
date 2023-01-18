@@ -1,6 +1,5 @@
-package com.chrisojukwu.newsapp
+package com.chrisojukwu.newsapp.ui.home
 
-import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.chrisojukwu.newsapp.R
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -24,18 +24,6 @@ class ContainerFragment : Fragment() {
         (activity as AppCompatActivity?)!!.supportActionBar!!.displayOptions =
             androidx.appcompat.app.ActionBar.DISPLAY_SHOW_CUSTOM
         (activity as AppCompatActivity?)!!.supportActionBar!!.setCustomView(R.layout.action_bar_custom)
-//        when (context?.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
-//            Configuration.UI_MODE_NIGHT_YES -> {
-//                (activity as AppCompatActivity?)!!.supportActionBar!!.setCustomView(R.layout.action_bar_custom_night)
-//            }
-//            Configuration.UI_MODE_NIGHT_NO -> {
-//                (activity as AppCompatActivity?)!!.supportActionBar!!.setCustomView(R.layout.action_bar_custom)
-//            }
-//            Configuration.UI_MODE_NIGHT_UNDEFINED -> {
-//                (activity as AppCompatActivity?)!!.supportActionBar!!.setCustomView(R.layout.action_bar_custom)
-//            }
-//        }
-
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_container, container, false)

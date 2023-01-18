@@ -1,9 +1,8 @@
-package com.chrisojukwu.newsapp
+package com.chrisojukwu.newsapp.ui.home
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-private const val ARG_OBJECT = "object"
 
 class FragmentContainerAdapter( fragment: Fragment) :
     FragmentStateAdapter(fragment) {

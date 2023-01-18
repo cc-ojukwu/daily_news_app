@@ -1,15 +1,16 @@
-package com.chrisojukwu.newsapp
+package com.chrisojukwu.newsapp.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.chrisojukwu.newsapp.databinding.NewsListItemSearchBinding
+import com.chrisojukwu.newsapp.data.models.NewsItem
+import com.chrisojukwu.newsapp.databinding.NewsListItemSportsBinding
 
 
-class SearchListAdapter(private val onSearchNewsItemClick: (newsStory: NewsItem) -> Unit) :
-    ListAdapter<NewsItem, SearchListAdapter.NewsItemViewHolder>(DiffCallback) {
+class SportsListAdapter(private val onSportsNewsItemClick: (newsStory: NewsItem) -> Unit) :
+    ListAdapter<NewsItem, SportsListAdapter.NewsItemViewHolder>(DiffCallback) {
 
     companion object DiffCallback : DiffUtil.ItemCallback<NewsItem>() {
         override fun areItemsTheSame(oldItem: NewsItem, newItem: NewsItem): Boolean {
@@ -23,7 +24,7 @@ class SearchListAdapter(private val onSearchNewsItemClick: (newsStory: NewsItem)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsItemViewHolder {
-        val view = NewsListItemSearchBinding.inflate(LayoutInflater.from(parent.context))
+        val view = NewsListItemSportsBinding.inflate(LayoutInflater.from(parent.context))
         return NewsItemViewHolder(view)
 
     }
@@ -31,13 +32,13 @@ class SearchListAdapter(private val onSearchNewsItemClick: (newsStory: NewsItem)
     override fun onBindViewHolder(holder: NewsItemViewHolder, position: Int) {
         val newsItem = getItem(position)
         holder.bind(newsItem)
-        holder.binding.textContainer.setOnClickListener {
-            onSearchNewsItemClick(newsItem)
+        holder.binding.cardViewSportsNewsItem.setOnClickListener {
+            onSportsNewsItemClick(newsItem)
         }
     }
 
     class NewsItemViewHolder(
-        var binding: NewsListItemSearchBinding
+        var binding: NewsListItemSportsBinding
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(newsItem: NewsItem) {

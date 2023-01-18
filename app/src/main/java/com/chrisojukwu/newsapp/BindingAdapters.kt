@@ -6,6 +6,11 @@ import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.chrisojukwu.newsapp.data.models.NewsItem
+import com.chrisojukwu.newsapp.ui.home.HeadlinesListAdapter
+import com.chrisojukwu.newsapp.ui.home.SportsListAdapter
+import com.chrisojukwu.newsapp.ui.home.TechListAdapter
+import com.chrisojukwu.newsapp.ui.search.SearchListAdapter
 
 //use coil library to display image urls in image view
 @BindingAdapter("imageViewUrl")

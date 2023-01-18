@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/completeNewsFragment"
-        android:name="com.chrisojukwu.newsapp.FullNewsPageFragment"
+        android:name="com.chrisojukwu.newsapp.ui.home.FullNewsPageFragment"
         android:label="fragment_complete_news"
         tools:layout="@layout/fragment_full_news_page" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/containerFragment"
-        android:name="com.chrisojukwu.newsapp.ContainerFragment"
+        android:name="com.chrisojukwu.newsapp.ui.home.ContainerFragment"
         android:label="fragment_container"
         tools:layout="@layout/fragment_container" >
         <action
@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/topPicksFragment"
-        android:name="com.chrisojukwu.newsapp.TopPicksFragment"
+        android:name="com.chrisojukwu.newsapp.ui.toppicks.TopPicksFragment"
         android:label="fragment_top_picks"
         tools:layout="@layout/fragment_top_picks" >
         <action
@@ -51,7 +51,7 @@
     </fragment>
     <fragment
         android:id="@+id/fullNewsPageSportsFragment"
-        android:name="com.chrisojukwu.newsapp.FullNewsPageSportsFragment"
+        android:name="com.chrisojukwu.newsapp.ui.home.FullNewsPageSportsFragment"
         android:label="FullNewsPageSportsFragment" >
         <action
             android:id="@+id/action_fullNewsPageSportsFragment_to_containerFragment"
@@ -59,7 +59,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchNewsFragment"
-        android:name="com.chrisojukwu.newsapp.SearchNewsFragment"
+        android:name="com.chrisojukwu.newsapp.ui.search.SearchNewsFragment"
         android:label="fragment_search_news"
         tools:layout="@layout/fragment_search_news" >
         <action
@@ -74,7 +74,7 @@
     </fragment>
     <fragment
         android:id="@+id/fullNewsPageTechFragment"
-        android:name="com.chrisojukwu.newsapp.FullNewsPageTechFragment"
+        android:name="com.chrisojukwu.newsapp.ui.home.FullNewsPageTechFragment"
         android:label="FullNewsPageTechFragment" >
         <action
             android:id="@+id/action_fullNewsPageTechFragment_to_containerFragment"
@@ -82,7 +82,7 @@
     </fragment>
     <fragment
         android:id="@+id/fullNewsPageSearchFragment"
-        android:name="com.chrisojukwu.newsapp.FullNewsPageSearch"
+        android:name="com.chrisojukwu.newsapp.ui.search.FullNewsPageSearch"
         android:label="full_news_page_search" >
         <action
             android:id="@+id/action_full_news_page_search_to_searchNewsFragment"

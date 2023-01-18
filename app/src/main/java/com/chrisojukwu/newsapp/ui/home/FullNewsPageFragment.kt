@@ -1,4 +1,4 @@
-package com.chrisojukwu.newsapp
+package com.chrisojukwu.newsapp.ui.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,17 +8,19 @@ import android.view.ViewGroup
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
-import com.chrisojukwu.newsapp.databinding.FragmentFullNewsPageSportsBinding
+import com.chrisojukwu.newsapp.NewsViewModel
+import com.chrisojukwu.newsapp.databinding.FragmentFullNewsPageBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class FullNewsPageSportsFragment : Fragment() {
 
-    private var binding: FragmentFullNewsPageSportsBinding? = null
+@AndroidEntryPoint
+class FullNewsPageFragment : Fragment() {
+    private var binding: FragmentFullNewsPageBinding? = null
     private val sharedViewModel: NewsViewModel by activityViewModels()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //display only the up navigate icon in the Action Bar
+        //(activity as AppCompatActivity?)!!.supportActionBar!!.title = ""
         (activity as AppCompatActivity?)!!.supportActionBar!!.displayOptions =
             ActionBar.DISPLAY_HOME_AS_UP
     }
@@ -28,13 +30,13 @@ class FullNewsPageSportsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        val fragmentBinding = FragmentFullNewsPageSportsBinding.inflate(inflater)
+        val fragmentBinding = FragmentFullNewsPageBinding.inflate(inflater)
         binding = fragmentBinding
-
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding?.lifecycleOwner = viewLifecycleOwner
         binding?.sharedViewModel = sharedViewModel
         return fragmentBinding.root
+
     }
 
     override fun onDestroyView() {

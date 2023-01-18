@@ -7,7 +7,7 @@
 
         <variable
             name="newsItem"
-            type="com.chrisojukwu.newsapp.NewsItem" />
+            type="com.chrisojukwu.newsapp.data.models.NewsItem" />
 
     </data>
 

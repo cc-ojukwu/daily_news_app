@@ -1,43 +1,45 @@
 package com.chrisojukwu.newsapp
 
-import android.util.Log
 import androidx.lifecycle.*
-import kotlinx.coroutines.launch
-import java.io.IOException
+import com.chrisojukwu.newsapp.data.NewsRepository
+import com.chrisojukwu.newsapp.data.models.NewsItem
+import com.chrisojukwu.newsapp.util.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import javax.inject.Inject
 
 enum class NewsApiStatus { LOADING, DONE, ERROR }
 
-class NewsViewModel : ViewModel() {
+@HiltViewModel
+class NewsViewModel @Inject constructor(
+    private val repository: NewsRepository
+) : ViewModel() {
 
     private val _status = MutableLiveData<NewsApiStatus>()
     val status: LiveData<NewsApiStatus> = _status
 
-    private val _newsList = MutableLiveData<MutableList<NewsItem>>()
-    val newsList: LiveData<MutableList<NewsItem>> = _newsList
-
+    private val _newsList = MutableLiveData<List<NewsItem>?>()
+    val newsList: LiveData<List<NewsItem>?> = _newsList
 
 
     private val _statusSports = MutableLiveData<NewsApiStatus>()
     val statusSports: LiveData<NewsApiStatus> = _statusSports
 
-    private val _newsListSports = MutableLiveData<MutableList<NewsItem>>()
-    val newsListSports: LiveData<MutableList<NewsItem>> = _newsListSports
+    private val _newsListSports = MutableLiveData<List<NewsItem>?>()
+    val newsListSports: LiveData<List<NewsItem>?> = _newsListSports
 
-
-
-    private val _newsListTech = MutableLiveData<MutableList<NewsItem>>()
-    val newsListTech: LiveData<MutableList<NewsItem>> = _newsListTech
+    private val _newsListTech = MutableLiveData<List<NewsItem>?>()
+    val newsListTech: LiveData<List<NewsItem>?> = _newsListTech
 
     private val _statusTech = MutableLiveData<NewsApiStatus>()
     val statusTech: LiveData<NewsApiStatus> = _statusTech
 
-
-
     private val _statusSearch = MutableLiveData<NewsApiStatus>()
     val statusSearch: LiveData<NewsApiStatus> = _statusSearch
 
-    private val _newsListSearch = MutableLiveData<MutableList<NewsItem>>()
-    val newsListSearch: LiveData<MutableList<NewsItem>> = _newsListSearch
+    private val _newsListSearch = MutableLiveData<List<NewsItem>?>()
+    val newsListSearch: LiveData<List<NewsItem>?> = _newsListSearch
 
 
     var currentHeadlineTitle = ""
@@ -69,127 +71,64 @@ class NewsViewModel : ViewModel() {
     }
 
     private fun getNews() {
-        viewModelScope.launch {
-            NewsApiStatus.LOADING
-            try {
-                val response = NewsApi.retrofitService.getNewsResponse(
-                    apikey = "pub_102470fab747a7f00be27ca2d1556739c3d3f",
-                    language = "en"
-                )
-                if (response.isSuccessful && response.body() != null) {
-                    val rawResponse = response.body()!!.results
-
-                    //initialize _newsList.value
-                    _newsList.value = mutableListOf()
-
-                    //remove array items that contain null image urls
-                    for (newsItem in rawResponse) {
-                        if (newsItem.image_url != null) {
-                            _newsList.value?.add(newsItem)
-                        }
+        _status.value = NewsApiStatus.LOADING
+        repository.getNews()
+            .onEach { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        _status.value = NewsApiStatus.DONE
+                        _newsList.value = result.data
                     }
+                    is Resource.Error -> _status.value = NewsApiStatus.ERROR
+                    else -> {}
                 }
-                Log.e("success", "Response successful")
-                _status.value = NewsApiStatus.DONE
-            } catch (e: Exception) {
-                _status.value = NewsApiStatus.ERROR
-                Log.e("not successful", "Response not successful")
-                //_newsList.value = mutableListOf()
-            } catch (e: IOException) {
-                _status.value = NewsApiStatus.ERROR
-                Log.e("not successful", "IOException- perhaps no internet connection")
-            }
-
-        }
+            }.launchIn(viewModelScope)
     }
 
+    //sports
     private fun getNewsSports() {
-        viewModelScope.launch {
-            NewsApiStatus.LOADING
-            try {
-                val response = NewsApi.retrofitService.getNewsResponseSports(
-                    apikey = "pub_102470fab747a7f00be27ca2d1556739c3d3f",
-                    category = "sports"
-                )
-                if (response.isSuccessful && response.body() != null) {
-                    Log.e("sports success", "Response successful")
-                    val rawResponseSports = response.body()!!.results
-                    _newsListSports.value = mutableListOf()
-                    for (newsItem in rawResponseSports) {
-                        if (newsItem.image_url != null) {
-                            _newsListSports.value?.add(newsItem)
-                        }
+        _statusSports.value = NewsApiStatus.LOADING
+        repository.getNewsSports()
+            .onEach { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        _statusSports.value = NewsApiStatus.DONE
+                        _newsListSports.value = result.data
                     }
+                    is Resource.Error -> _statusSports.value = NewsApiStatus.ERROR
+                    else -> {}
                 }
-                _statusSports.value = NewsApiStatus.DONE
-            } catch (e: Exception) {
-                _statusSports.value = NewsApiStatus.ERROR
-                Log.e("sports not successful", "Response not successful")
-                //_newsList.value = mutableListOf()
-            } catch (e: IOException) {
-                _statusSports.value = NewsApiStatus.ERROR
-                Log.e("sports not successful", "IOException- perhaps no internet connection")
-            }
-
-        }
+            }.launchIn(viewModelScope)
     }
 
+    //technology
     private fun getNewsTech() {
-        viewModelScope.launch {
-            NewsApiStatus.LOADING
-            try {
-                val response = NewsApi.retrofitService.getNewsResponseTech(
-                    apikey = "pub_102470fab747a7f00be27ca2d1556739c3d3f",
-                    category = "technology"
-                )
-                if (response.isSuccessful && response.body() != null) {
-                    val rawResponseTech = response.body()!!.results
-                    _newsListTech.value = mutableListOf()
-                    for (newsItem in rawResponseTech) {
-                        if (newsItem.image_url != null) {
-                            _newsListTech.value?.add(newsItem)
-                        }
+        _statusTech.value = NewsApiStatus.LOADING
+        repository.getNewsTech()
+            .onEach { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        _statusTech.value = NewsApiStatus.DONE
+                        _newsListTech.value = result.data
                     }
+                    is Resource.Error -> _statusTech.value = NewsApiStatus.ERROR
+                    else -> {}
                 }
-                Log.e("success tech", "Response successful")
-                _statusTech.value = NewsApiStatus.DONE
-            } catch (e: Exception) {
-                _statusTech.value = NewsApiStatus.ERROR
-                Log.e("not successful tech", "Response not successful")
-                //_newsList.value = mutableListOf()
-            } catch (e: IOException) {
-                _statusTech.value = NewsApiStatus.ERROR
-                Log.e("not successful", "IOException- perhaps no internet connection")
-            }
-//
-
-
-        }
+            }.launchIn(viewModelScope)
     }
 
-    fun getNewsSearch() {
-        viewModelScope.launch {
-            NewsApiStatus.LOADING
-            try {
-                val response = NewsApi.retrofitService.getNewsResponseSearch(
-                    apikey = "pub_102470fab747a7f00be27ca2d1556739c3d3f",
-                    language = "en",
-                    q = searchString
-                )
-                if (response.isSuccessful && response.body() != null) {
-                    _newsListSearch.value = response.body()!!.results
-
+    fun getNewsSearch(query: String) {
+        _statusSearch.value = NewsApiStatus.LOADING
+        repository.getNewsSearch(query)
+            .onEach { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        _statusSearch.value = NewsApiStatus.DONE
+                        _newsListSearch.value = result.data
+                    }
+                    is Resource.Error -> _statusSearch.value = NewsApiStatus.ERROR
+                    else -> {}
                 }
-                Log.e("success tech", "Response successful")
-                _statusSearch.value = NewsApiStatus.DONE
-            } catch (e: Exception) {
-                _statusSearch.value = NewsApiStatus.ERROR
-                Log.e("not successful tech", "Response not successful")
-                _newsList.value = mutableListOf()
-            } catch (e: IOException) {
-                _statusSearch.value = NewsApiStatus.ERROR
-                Log.e("not successful", "IOException- perhaps no internet connection")
-            }
-        }
+            }.launchIn(viewModelScope)
     }
 }

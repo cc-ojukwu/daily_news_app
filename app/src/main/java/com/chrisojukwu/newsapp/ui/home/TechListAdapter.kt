@@ -1,15 +1,16 @@
-package com.chrisojukwu.newsapp
+package com.chrisojukwu.newsapp.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.chrisojukwu.newsapp.databinding.NewsListItemSportsBinding
+import com.chrisojukwu.newsapp.data.models.NewsItem
+import com.chrisojukwu.newsapp.databinding.NewsListItemTechBinding
 
 
-class SportsListAdapter(private val onSportsNewsItemClick: (newsStory: NewsItem) -> Unit) :
-    ListAdapter<NewsItem, SportsListAdapter.NewsItemViewHolder>(DiffCallback) {
+class TechListAdapter(private val onTechNewsItemClick: (newsStory: NewsItem) -> Unit) :
+    ListAdapter<NewsItem, TechListAdapter.NewsItemViewHolder>(DiffCallback) {
 
     companion object DiffCallback : DiffUtil.ItemCallback<NewsItem>() {
         override fun areItemsTheSame(oldItem: NewsItem, newItem: NewsItem): Boolean {
@@ -23,7 +24,7 @@ class SportsListAdapter(private val onSportsNewsItemClick: (newsStory: NewsItem)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsItemViewHolder {
-        val view = NewsListItemSportsBinding.inflate(LayoutInflater.from(parent.context))
+        val view = NewsListItemTechBinding.inflate(LayoutInflater.from(parent.context))
         return NewsItemViewHolder(view)
 
     }
@@ -31,13 +32,13 @@ class SportsListAdapter(private val onSportsNewsItemClick: (newsStory: NewsItem)
     override fun onBindViewHolder(holder: NewsItemViewHolder, position: Int) {
         val newsItem = getItem(position)
         holder.bind(newsItem)
-        holder.binding.cardViewSportsNewsItem.setOnClickListener {
-            onSportsNewsItemClick(newsItem)
+        holder.binding.cardViewTechNewsItem.setOnClickListener {
+            onTechNewsItemClick(newsItem)
         }
     }
 
     class NewsItemViewHolder(
-        var binding: NewsListItemSportsBinding
+        var binding: NewsListItemTechBinding
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(newsItem: NewsItem) {

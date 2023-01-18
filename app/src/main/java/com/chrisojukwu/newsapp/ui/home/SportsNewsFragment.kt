@@ -1,4 +1,4 @@
-package com.chrisojukwu.newsapp
+package com.chrisojukwu.newsapp.ui.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.chrisojukwu.newsapp.NewsViewModel
+import com.chrisojukwu.newsapp.R
+import com.chrisojukwu.newsapp.data.models.NewsItem
 import com.chrisojukwu.newsapp.databinding.FragmentSportsNewsBinding
+import com.chrisojukwu.newsapp.ui.home.SportsListAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SportsFragment : Fragment() {
 
     private val sharedViewModel: NewsViewModel by activityViewModels()
