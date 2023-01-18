@@ -10,8 +10,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.runBlocking
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -35,10 +38,21 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideRetrofitBuilder(converterFactory: MoshiConverterFactory): Retrofit {
+    fun provideOkHttpClient(): OkHttpClient {
+
+        return OkHttpClient.Builder()
+            .connectTimeout(5L, TimeUnit.SECONDS)
+            .readTimeout(5L, TimeUnit.SECONDS)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRetrofitBuilder(converterFactory: MoshiConverterFactory, okHttpClient: OkHttpClient): Retrofit {
         val retrofitBuilder = Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(converterFactory)
+            .client(okHttpClient)
 
         return retrofitBuilder.build()
     }

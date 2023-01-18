@@ -2,6 +2,7 @@ package com.chrisojukwu.newsapp
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -37,6 +38,21 @@ fun bindStatus(statusImageView: ImageView, status: NewsApiStatus?) {
         }
         NewsApiStatus.DONE -> {
             statusImageView.visibility = View.GONE
+        }
+    }
+}
+
+@BindingAdapter("newsApiRefresh")
+fun showRefresh(textView: TextView, status: NewsApiStatus?) {
+    when (status) {
+        NewsApiStatus.ERROR -> {
+            textView.visibility = View.VISIBLE
+        }
+        NewsApiStatus.DONE -> {
+            textView.visibility = View.GONE
+        }
+        NewsApiStatus.LOADING -> {
+            textView.visibility = View.GONE
         }
     }
 }

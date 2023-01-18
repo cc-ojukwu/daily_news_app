@@ -10,4 +10,5 @@
     <string name="headlines">Headlines</string>
     <string name="search">Search</string>
     <string name="top_picks_menu">Top Picks</string>
+    <string name="refresh"><u>Refresh</u></string>
 </resources>

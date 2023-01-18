@@ -48,6 +48,10 @@ class HeadlinesFragment : Fragment() {
             )
         )
 
+        binding.refresh.setOnClickListener {
+            sharedViewModel.refresh()
+        }
+
     }
 
     private fun onNewsItemClick(newsItem: NewsItem) {

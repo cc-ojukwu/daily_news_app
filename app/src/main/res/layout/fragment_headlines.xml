@@ -45,6 +45,22 @@
             app:newsApiStatus="@{sharedViewModel.status}"
             android:contentDescription="@string/status" />
 
+        <TextView
+            android:id="@+id/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="180dp"
+            android:visibility="gone"
+            android:text="@string/refresh"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="24sp"
+            android:padding="8dp"
+            app:newsApiRefresh="@{sharedViewModel.status}"
+            android:textColor="@color/header_blue"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -16,9 +16,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        buildConfigField("String", "API_KEY", "\"pub_102470fab747a7f00be27ca2d1556739c3d3f\"")
-        buildConfigField("String", "BASE_URL", "\"https://newsdata.io/\"")
+        
 
     }
 

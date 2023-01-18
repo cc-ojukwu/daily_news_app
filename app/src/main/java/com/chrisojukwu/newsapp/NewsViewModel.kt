@@ -70,6 +70,12 @@ class NewsViewModel @Inject constructor(
         getNewsTech()
     }
 
+    fun refresh() {
+        getNews()
+        getNewsSports()
+        getNewsTech()
+    }
+
     private fun getNews() {
         _status.value = NewsApiStatus.LOADING
         repository.getNews()
